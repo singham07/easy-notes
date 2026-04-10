@@ -9,7 +9,7 @@ A simple full-stack note-taking application with automatic note summarization.
 
 ## Features
 
-- Create, edit, and delete notes
+- Create, edit, and delete summary
 - Automatic summary generation using the GROQ API
 - Select different summary modes (`short`, `bullet`, `detailed`, `exam`)
 - Client-side markdown rendering with `react-markdown` and `remark-gfm`
