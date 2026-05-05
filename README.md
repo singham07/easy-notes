@@ -1,4 +1,4 @@
-# Easy Note
+# Easy Notes
 
 A simple full-stack note-taking application with automatic note summarization.
 
