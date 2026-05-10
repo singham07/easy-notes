@@ -15,9 +15,11 @@ function App() {
   const [editTitle, setEditTitle] = useState("");
   const [editContent, setEditContent] = useState("");
 
+  const API_BASE_URL = process.env.REACT_APP_API_URL || "http://localhost:5000";
+
   const fetchNotes = async () => {
     try {
-      const res = await fetch("https://your-backend-url.onrender.com/api/notes");
+      const res = await fetch(`${API_BASE_URL}/api/notes`);
       const data = await res.json();
       setNotes(data);
     } catch {
@@ -35,7 +37,7 @@ function App() {
     setLoading(true);
 
     try {
-      await fetch("http://localhost:5000/api/notes/create", {
+      await fetch(`${API_BASE_URL}/api/notes/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,7 +59,7 @@ function App() {
 
   const deleteNote = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/notes/${id}`, {
+      await fetch(`${API_BASE_URL}/api/notes/${id}`, {
         method: "DELETE",
       });
 
@@ -81,7 +83,7 @@ function App() {
 
   const saveEdit = async (id) => {
     try {
-      await fetch(`http://localhost:5000/api/notes/${id}`, {
+      await fetch(`${API_BASE_URL}/api/notes/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
