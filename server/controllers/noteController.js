@@ -1,4 +1,5 @@
 const Note = require("../models/Note");
+const NoteHistory = require("../models/History");
 const summarizeText = require("../utils/summarizer");
 
 exports.createNote = async (req, res) => {
@@ -15,6 +16,12 @@ exports.createNote = async (req, res) => {
     });
 
     const savedNote = await note.save();
+
+    await NoteHistory.create({
+      noteId: savedNote._id,
+      title: savedNote.title,
+      action: "created",
+    });
 
     res.json(savedNote);
   } catch (error) {
@@ -58,10 +65,30 @@ exports.generateSummary = async (req, res) => {
 exports.deleteNote = async (req, res) => {
   try {
     const { id } = req.params;
+    const note = await Note.findById(id);
+
+    if (!note) {
+      return res.status(404).json({ message: "Note not found" });
+    }
 
     await Note.findByIdAndDelete(id);
 
+    await NoteHistory.create({
+      noteId: id,
+      title: note.title,
+      action: "deleted",
+    });
+
     res.json({ message: "Note deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+exports.getHistory = async (req, res) => {
+  try {
+    const history = await NoteHistory.find().sort({ createdAt: -1 });
+    res.json(history);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
