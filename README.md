@@ -18,6 +18,7 @@
 - 📱 **Responsive Design**: Works perfectly on desktop and mobile devices
 - 🔔 **Toast Notifications**: User-friendly feedback for all actions
 - 📊 **Markdown Rendering**: Rich text display with GitHub Flavored Markdown support
+- 📈 **Activity History**: Track created and deleted notes over time
 
 ## 📸 Screenshots
 
@@ -42,6 +43,10 @@
 #### Exam-Style Summary
 ![Exam Summary](screenshots/examout.png)
 *Structured format perfect for study and review*
+
+### Activity History
+![Activity History](screenshots/history.png)
+*View note creation and deletion events with real-time counters*
 
 ## 🏗️ Architecture
 
@@ -128,6 +133,7 @@ easy-notes/
 | PUT | `/api/notes/:id` | Update an existing note |
 | DELETE | `/api/notes/:id` | Delete a note |
 | POST | `/api/notes/:id/summarize` | Regenerate note summary |
+| GET | `/api/notes/history` | Retrieve activity history of created and deleted notes |
 
 ### Request/Response Examples
 
